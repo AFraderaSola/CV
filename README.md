@@ -1,4 +1,4 @@
-# CV
+# Albert Fradera-Sola CV
 
 Here You can find my CV on both .pdf and .html formats.
 
