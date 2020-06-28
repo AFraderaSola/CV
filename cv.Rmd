@@ -67,15 +67,12 @@ Contact {#contact}
 CV %>% print_contact_info()
 ```
 
-
-
 Software Skills {#skills}
 --------------------------------------------------------------------------------
 
 ```{r}
 CV %>% print_skill_bars()
 ```
-
 
 
 Disclaimer {#disclaimer}
@@ -86,7 +83,6 @@ Made with the R packages [**pagedown**](https://github.com/rstudio/pagedown) and
 The source code is available on [github.com/AFraderaSola/CV](https://github.com/AFraderaSola/CV).
 
 Last updated on `r Sys.Date()`.
-
 
 
 Main
@@ -123,15 +119,37 @@ CV %<>% print_section('online_education')
 Research Experience {data-icon=flask}
 --------------------------------------------------------------------------------
 
+::: aside
+```{r, message=F, warning=F}
+CV %<>% print_text_block('research_experience_aside')
+cat("\n", fill = T)
+cat("\n", fill = T)
+print_wordcloud(CV)
+```
+:::
+
 ```{r}
 CV %<>% print_section('research_positions')
 ```
 
-Selected Publications, Posters, and Talks {data-icon=book}
+
+
+
+Selected Publications {data-icon=book}
 --------------------------------------------------------------------------------
+
+
 
 ```{r}
 CV %<>% print_section('academic_articles')
+```
+
+
+Conferences, talks and posters {data-icon=chalkboard-teacher}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('conferences')
 ```
 
 
@@ -139,4 +157,3 @@ CV %<>% print_section('academic_articles')
 ```{r}
 CV %<>% print_links()
 ```
-
