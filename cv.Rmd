@@ -1,0 +1,169 @@
+---
+title: "Albert Fradera Sola's CV"
+author: Albert Fradera Sola
+date: "`r Sys.Date()`"
+params:
+  pdf_mode:
+    value: true
+output:
+  pagedown::html_resume:
+    css: ['dd_cv.css', 'resume']
+    self_contained: true
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis', 
+  echo = FALSE
+)
+
+library(magrittr) # For the pipe
+source("CV_printing_functions.R")
+
+# Read in all data and initialize a CV printer object
+CV <- create_CV_object(
+  data_location = "C:/Users/afradera/Desktop/CV/data/",  
+  pdf_mode = params$pdf_mode
+)
+
+```
+
+
+```{r}
+# When in pdf export mode the little dots are unaligned, so fix that with some conditional CSS.
+if(params$pdf_mode) {
+    cat("
+<style>
+:root{
+  --decorator-outer-offset-left: -6.5px;
+}
+</style>")
+}
+```
+
+
+Aside
+================================================================================
+
+```{r}
+# Build interactive network of positions colored by section
+# and connected if they occurred in the same year
+datadrivencv::build_network_logo(CV$entries_data)
+```
+
+
+```{r}
+if(params$pdf_mode){
+  cat("View this CV online with links at https://github.com/AFraderaSola/CV/blob/master/cv.html")
+} else {
+  cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://github.com/AFraderaSola/CV/blob/master/cv.pdf)")
+}
+```
+
+Contact {#contact}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %>% print_contact_info()
+```
+
+Software Skills {#skills}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %>% print_skill_bars()
+```
+
+Language Skills {#languageskills}
+--------------------------------------------------------------------------------
+
+```{r, message=F, warning=F}
+print_language_skills(CV)
+```
+
+Main
+================================================================================
+
+Albert Fradera Sola {#title}
+--------------------------------------------------------------------------------
+
+```{r}
+# Note the special double pipe so we modify the CV object in place
+CV %<>% print_text_block("intro") 
+```
+
+
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('education')
+```
+
+
+
+Online education {data-icon=globe data-concise=true}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('online_education')
+```
+
+
+
+Research Experience {data-icon=flask}
+--------------------------------------------------------------------------------
+
+::: aside
+
+```{r, message=F, warning=F}
+CV %<>% print_text_block('research_experience_aside')
+cat("\n", fill = T)
+cat("\n", fill = T)
+print_wordcloud(CV)
+cat("\n", fill = T)
+cat("\n", fill = T)
+```
+:::
+
+```{r}
+CV %<>% print_section('research_positions')
+```
+
+
+Selected Publications {data-icon=book}
+--------------------------------------------------------------------------------
+
+
+
+```{r}
+CV %<>% print_section('academic_articles')
+```
+
+
+Conferences, talks and posters {data-icon=chalkboard-teacher}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('conferences')
+```
+
+
+```{r}
+CV %<>% print_links()
+```
+
+
+::: aside
+
+Disclaimer {#disclaimer}
+--------------------------------------------------------------------------------
+
+Made with the R packages [**pagedown**](https://github.com/rstudio/pagedown) and [**datadrivencv**](https://github.com/nstrayer/datadrivencv). 
+
+The source code is available on [github.com/AFraderaSola/CV](https://github.com/AFraderaSola/CV).
+
+Last updated on `r Sys.Date()`.
+
+:::
