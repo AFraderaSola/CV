@@ -22,10 +22,13 @@ source("CV_printing_functions.R")
 
 # Read in all data and initialize a CV printer object
 CV <- create_CV_object(
-  data_location = "C:/Users/afradera/Desktop/CV/data/",  
+  data_location = "U:/Desktop/Cool_Packages_and_Rescources/CV/data/",  
   pdf_mode = params$pdf_mode
 )
-
+NET <- create_network_object(
+  data_location = "U:/Desktop/Cool_Packages_and_Rescources/CV/data/",  
+  pdf_mode = params$pdf_mode
+)
 ```
 
 
@@ -48,7 +51,7 @@ Aside
 ```{r}
 # Build interactive network of positions colored by section
 # and connected if they occurred in the same year
-datadrivencv::build_network_logo(CV$entries_data)
+datadrivencv::build_network_logo(NET$entries_data)
 ```
 
 
@@ -156,9 +159,6 @@ CV %<>% print_links()
 
 
 ::: aside
-
-Disclaimer {#disclaimer}
---------------------------------------------------------------------------------
 
 Made with the R packages [**pagedown**](https://github.com/rstudio/pagedown) and [**datadrivencv**](https://github.com/nstrayer/datadrivencv). 
 
