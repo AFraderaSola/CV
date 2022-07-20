@@ -22,11 +22,11 @@ source("CV_printing_functions.R")
 
 # Read in all data and initialize a CV printer object
 CV <- create_CV_object(
-  data_location = "U:/Desktop/Cool_Packages_and_Rescources/CV/data/",  
+  data_location = "C:/Users/afradera/Desktop/Bureucracy/CV/Mainz_BFCF/data/",  
   pdf_mode = params$pdf_mode
 )
 NET <- create_network_object(
-  data_location = "U:/Desktop/Cool_Packages_and_Rescources/CV/data/",  
+  data_location = "C:/Users/afradera/Desktop/Bureucracy/CV/Mainz_BFCF/data/",  
   pdf_mode = params$pdf_mode
 )
 ```
@@ -106,38 +106,63 @@ CV %<>% print_section('education')
 
 
 
-Online education {data-icon=globe data-concise=true}
---------------------------------------------------------------------------------
-
-```{r}
-CV %<>% print_section('online_education')
-```
-
-
-
 Research Experience {data-icon=flask}
 --------------------------------------------------------------------------------
 
-::: aside
-
-```{r, message=F, warning=F}
-CV %<>% print_text_block('research_experience_aside')
-cat("\n", fill = T)
-cat("\n", fill = T)
-print_wordcloud(CV)
-cat("\n", fill = T)
-cat("\n", fill = T)
-```
-:::
 
 ```{r}
 CV %<>% print_section('research_positions')
 ```
 
 
-Selected Publications {data-icon=book}
+
+Wet lab projects and related skills {data-icon=vial}
 --------------------------------------------------------------------------------
 
+```{r}
+CV %<>% print_section('wet_skills')
+```
+
+
+\pagebreak
+
+Dry lab projects and related skills {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+::: aside
+
+```{r, message=F, warning=F}
+CV %<>% print_text_block('selected_publications_aside')
+cat("\n", fill = T)
+cat("\n", fill = T)
+print_wordcloud(CV)
+cat("\n", fill = T)
+cat("\n", fill = T)
+CV %<>% print_text_block('wordcloud_aside')
+```
+:::
+
+```{r}
+CV %<>% print_section('dry_skills')
+```
+
+
+Conferences and courses {data-icon=chalkboard-teacher}
+--------------------------------------------------------------------------------
+
+```{r}
+CV %<>% print_section('conferences')
+```
+
+::: aside
+
+```{r, message=F, warning=F}
+CV %<>% print_text_block('conference_aside')
+```
+:::
+
+Selected Publications {data-icon=book}
+--------------------------------------------------------------------------------
 
 
 ```{r}
@@ -145,22 +170,9 @@ CV %<>% print_section('academic_articles')
 ```
 
 
-Conferences, talks and posters {data-icon=chalkboard-teacher}
---------------------------------------------------------------------------------
-
-```{r}
-CV %<>% print_section('conferences')
-```
-
-
-```{r}
-CV %<>% print_links()
-```
-
-
 ::: aside
 
-Made with the R packages [**pagedown**](https://github.com/rstudio/pagedown) and [**datadrivencv**](https://github.com/nstrayer/datadrivencv). 
+Document created with the R packages [**pagedown**](https://github.com/rstudio/pagedown) and [**datadrivencv**](https://github.com/nstrayer/datadrivencv). 
 
 The source code is available on [github.com/AFraderaSola/CV](https://github.com/AFraderaSola/CV).
 

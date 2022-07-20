@@ -256,7 +256,6 @@ print_section <- function(cv, section_id, glue_template = "default"){
 }
 
 
-
 #' @description Prints out text block identified by a given label.
 #' @param label ID of the text block to print as encoded in `label` column of `text_blocks` table.
 print_text_block <- function(cv, label){
@@ -356,7 +355,8 @@ print_wordcloud <- function(my_data) {
   docs <- tm_map(docs, removeWords, stopwords("english"))
   # Remove your own stop word
   # specify your stopwords as a character vector
-  docs <- tm_map(docs, removeWords, c("using", "however", "one","thesis","based", "either", "thus", "aberacuk", "naf", "project", "also", "firstauthor"))
+  docs <- tm_map(docs, removeWords, c("using", "however", "one","thesis","based", "either", "thus", "aberacuk", "naf", "project", "also", "firstauthor", "falk",
+                                      "coauthor", "phd", "spp", "can", "gos", "esc", "year", "pot"))
   # Remove punctuations
   docs <- tm_map(docs, removePunctuation)
   # Eliminate extra white spaces
