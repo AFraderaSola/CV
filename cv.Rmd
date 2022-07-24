@@ -11,6 +11,17 @@ output:
     self_contained: true
 ---
 
+<!-- inicio academic icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<!-- final academic icons -->
+
+ 
+<!-- inicio font awesome -->
+<script src="https://kit.fontawesome.com/1f72d6921a.js" crossorigin="anonymous"></script>
+
+ 
+<!-- final font awesome -->
+
 ```{r, include=FALSE}
 knitr::opts_chunk$set(
   results='asis', 
@@ -51,24 +62,37 @@ Aside
 ```{r}
 # Build interactive network of positions colored by section
 # and connected if they occurred in the same year
-datadrivencv::build_network_logo(NET$entries_data)
+build_network_logo2(NET$entries_data)
+cat("__My CV as an interactive network__")
+cat("\n", fill = T)
+cat("Bullet points (Blue, for <i class='fa fa-graduation-cap'></i> and <i class='fa fa-flask'></i>, and green, for <i class='fa fa-book'></i> and <i class='fas fa-chalkboard-teacher'></i>) are linked  by year. Interactive version [here](https://afraderasola.github.io/project/cvnetwork/)")
 ```
 
-
-```{r}
-if(params$pdf_mode){
-  cat("View this CV online with links at https://github.com/AFraderaSola/CV/blob/master/cv.html")
-} else {
-  cat("[<i class='fas fa-download'></i> Download a PDF of this CV](https://github.com/AFraderaSola/CV/blob/master/cv.pdf)")
-}
-```
 
 Contact {#contact}
 --------------------------------------------------------------------------------
 
 ```{r}
-CV %>% print_contact_info()
+# CV %>% print_contact_info()
 ```
+- <i class="fa fa-home"></i> [AFraderaSola](https://afraderasola.github.io/)
+
+- <i class="fa fa-envelope"></i> A.FraderaSola@imb.de
+
+- <i class="fa fa-phone"></i> +49 179 3469988
+
+- <a href='https://github.com/AFraderaSola' target='_blank'><i class="fa fa-github"></i></a> <a href='https://orcid.org/0000-0002-4780-9312' target='_blank'><i class="fab fa-orcid"></i></a> <a href='https://scholar.google.com/citations?view_op=list_works&hl=en&user=S0Hv4nUAAAAJ&gmla=AJsN-F7dv2Hh8UVQkxzPARPrR0TmHbHUFnlDDTqu3XSoAs8pjvmln4KlGq0KmOqv-nh01QC5a-8fNgQI76bZqElaMr7oE4mDr_Mp4NUpaGQI_jakncCYIJPGM_KYNo1mOhdEP0FuJc3Y' target='_blank'><i class="ai ai-google-scholar"></i></a> <a href='https://twitter.com/AFraderaSola' target='_blank'><i class="fa fa-twitter"></i></a>  <a href='https://stackoverflow.com/users/9634765/a-fraderasola' target='_blank'><i class="fa fa-stack-overflow"></i></a> <a href='https://www.imb.de/research/butter/research' target='_blank'><i class="fa fa-link"></i></a> 
+
+
+```{r}
+if(params$pdf_mode){
+  # cat("View this CV [online](https://github.com/AFraderaSola/CV/blob/master/cv.html)")
+  cat("\n")
+} else {
+  cat("<i class='fas fa-download'></i> Download this CV in [PDF](https://github.com/AFraderaSola/CV/blob/master/cv.pdf)")
+}
+```
+
 
 Software Skills {#skills}
 --------------------------------------------------------------------------------
@@ -129,10 +153,14 @@ CV %<>% print_section('wet_skills')
 Dry lab projects and related skills {data-icon=laptop}
 --------------------------------------------------------------------------------
 
+
+```{r}
+CV %<>% print_section('dry_skills')
+```
+
 ::: aside
 
 ```{r, message=F, warning=F}
-CV %<>% print_text_block('selected_publications_aside')
 cat("\n", fill = T)
 cat("\n", fill = T)
 print_wordcloud(CV)
@@ -142,31 +170,20 @@ CV %<>% print_text_block('wordcloud_aside')
 ```
 :::
 
+Selected Publications {data-icon=book}
+--------------------------------------------------------------------------------
+
 ```{r}
-CV %<>% print_section('dry_skills')
+CV %<>% print_section('academic_articles')
 ```
 
 
 Conferences and courses {data-icon=chalkboard-teacher}
 --------------------------------------------------------------------------------
 
+
 ```{r}
 CV %<>% print_section('conferences')
-```
-
-::: aside
-
-```{r, message=F, warning=F}
-CV %<>% print_text_block('conference_aside')
-```
-:::
-
-Selected Publications {data-icon=book}
---------------------------------------------------------------------------------
-
-
-```{r}
-CV %<>% print_section('academic_articles')
 ```
 
 
@@ -174,7 +191,7 @@ CV %<>% print_section('academic_articles')
 
 Document created with the R packages [**pagedown**](https://github.com/rstudio/pagedown) and [**datadrivencv**](https://github.com/nstrayer/datadrivencv). 
 
-The source code is available on [github.com/AFraderaSola/CV](https://github.com/AFraderaSola/CV).
+The source code is available on [github](https://github.com/AFraderaSola/CV).
 
 Last updated on `r Sys.Date()`.
 
