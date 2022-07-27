@@ -1,7 +1,5 @@
 # Albert Fradera-Sola CV
 
-Here You can find my CV on both .pdf and .html formats.
+Here you can find the scripts to generate a .pdf and .html version of my curriculum vitae. They are based on Nick Strayer's datatdivencv R package (http://nickstrayer.me/datadrivencv/), from which I adapted the code. 
 
-Additionally, you can find the code behind the documents (cv.Rmd)
-
-It is all based on Nick Strayer's (@NicholasStrayer) datatdivencv R package (http://nickstrayer.me/datadrivencv/)
+Additionally, you can find the data to generate a network of my CV as explained in my website tutorial (https://afraderasola.github.io/project/cvnetwork/)
