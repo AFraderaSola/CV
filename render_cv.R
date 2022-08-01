@@ -20,3 +20,4 @@ rmarkdown::render("cv.rmd",
 pagedown::chrome_print(input = tmp_html_cv_loc,
                        output = paste0(gsub(x = Sys.Date(),pattern = "-",replacement =  ""),"_cv.pdf"))
  
+

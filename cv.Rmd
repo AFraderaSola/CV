@@ -33,11 +33,11 @@ source("CV_printing_functions.R")
 
 # Read in all data and initialize a CV printer object
 CV <- create_CV_object(
-  data_location = "C:/Users/afradera/Desktop/Bureucracy/CV/Mainz_BFCF/data/",  
+  data_location = "C:/Users/afradera/Desktop/Bureucracy/CV/Dewpoint/data/",  
   pdf_mode = params$pdf_mode
 )
 NET <- create_network_object(
-  data_location = "C:/Users/afradera/Desktop/Bureucracy/CV/Mainz_BFCF/data/",  
+  data_location = "C:/Users/afradera/Desktop/Bureucracy/CV/Dewpoint/data/",  
   pdf_mode = params$pdf_mode
 )
 ```
