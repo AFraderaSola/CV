@@ -1,0 +1,11 @@
+Name of language,Relative numeric level of skill
+skill,level
+STAR,4.5
+Bowtie,4
+FastQC,4
+MultiQC,4
+fastqscreen,4
+deepTools,3.5
+HTSeq,3.5
+MACS2,2.5
+rMATS,2.5

@@ -52,6 +52,8 @@ create_CV_object <-  function(data_location,
     cv$contact_info <- readr::read_csv(paste0(data_location, "contact_info.csv"), skip = 1)
     cv$abstracts    <- readr::read_csv(paste0(data_location, "abstracts.csv"), skip = 1)
     cv$spoken       <- readr::read_csv(paste0(data_location, "speak_skills.csv"), skip = 1)
+    cv$proteomics   <- readr::read_csv(paste0(data_location, "proteomics_skills.csv"), skip = 1)
+    cv$genomics     <- readr::read_csv(paste0(data_location, "genomics_skills.csv"), skip = 1)
   }
   
   
@@ -338,6 +340,8 @@ print_wordcloud <- function(my_data) {
   
   text <- c(section_data$description_bullets, abstracts$abstract)
   
+  text <- iconv(text,from = "ISO-8859-1",to = "UTF-8")
+  
   docs <- Corpus(VectorSource(text))
   
   toSpace <- content_transformer(function (x , pattern ) gsub(pattern, " ", x))
@@ -357,7 +361,8 @@ print_wordcloud <- function(my_data) {
   # specify your stopwords as a character vector
   docs <- tm_map(docs, removeWords, c("using", "however", "one","thesis","based", "either", "thus", "aberacuk", "naf", "project", "also", "firstauthor", "falk",
                                       "coauthor", "phd", "spp", "can", "gos", "esc", "year", "pot", "might", "scientific", "remains", "par", "pol", "vivo","paper",
-                                      "furthermore", "play"))
+                                      "furthermore", "play", "butter","https", "erasmus", "known","estimated","two","talk","potential","majority", "show","study",
+                                      "discussed","four","leads","studies"))
   # Remove punctuations
   docs <- tm_map(docs, removePunctuation)
   # Eliminate extra white spaces
@@ -395,6 +400,44 @@ print_language_skills <- function(cv, out_of = 5, bar_color = "#969696", bar_bac
   invisible(cv)
 }
 
+print_proteomics_skills <- function(cv, out_of = 5, bar_color = "#969696", bar_background = "#d9d9d9", glue_template = "default"){
+  
+  if(glue_template == "default"){
+    glue_template <- "
+<div
+  class = 'skill-bar'
+  style = \"background:linear-gradient(to right,
+                                      {bar_color} {width_percent}%,
+                                      {bar_background} {width_percent}% 100%)\"
+>{skill}</div>"
+  }
+  cv$proteomics %>%
+    dplyr::mutate(width_percent = round(100*level/out_of)) %>%
+    glue::glue_data(glue_template) %>%
+    print()
+  
+  invisible(cv)
+}
+
+print_genomics_skills <- function(cv, out_of = 5, bar_color = "#969696", bar_background = "#d9d9d9", glue_template = "default"){
+  
+  if(glue_template == "default"){
+    glue_template <- "
+<div
+  class = 'skill-bar'
+  style = \"background:linear-gradient(to right,
+                                      {bar_color} {width_percent}%,
+                                      {bar_background} {width_percent}% 100%)\"
+>{skill}</div>"
+  }
+  cv$genomics %>%
+    dplyr::mutate(width_percent = round(100*level/out_of)) %>%
+    glue::glue_data(glue_template) %>%
+    print()
+  
+  invisible(cv)
+}
+
 build_network_logo2 <- function (position_data) 
 {
   positions <- position_data %>% dplyr::mutate(id = dplyr::row_number(), 
@@ -424,8 +467,8 @@ build_network_logo2 <- function (position_data)
                                              -timeline), edges = edges) %>% jsonlite::toJSON()
   viz_script <- readr::read_file(system.file("js/cv_network.js", 
                                              package = "datadrivencv"))
-  glue::glue("<script id = \"data_for_network\" type = \"application/json\">", 
+  iconv(glue::glue("<script id = \"data_for_network\" type = \"application/json\">", 
              "{network_data}", "</script>", "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js\"></script>", 
              "<svg style = \"width: 100%; height:200px; margin-top: -125px;\" id = \"cv_network_viz\"></svg>", 
-             "<script>", "{viz_script}", "</script>")
+             "<script>", "{viz_script}", "</script>"),from = "ISO-8859-1",to = "UTF-8")
 }

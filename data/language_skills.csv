@@ -1,6 +1,8 @@
 Name of language,Relative numeric level of skill
 skill,level
 R,4.5
-MaxQuant,4
 Bash,3.5
-Python,2
+markdown,3
+css,2
+Python,1.5
+html,0.5
